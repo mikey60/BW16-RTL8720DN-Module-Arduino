@@ -1,0 +1,103 @@
+#
+                     ######################                 ####################            ########################
+                    #                      #               #                    #          #                        #
+                   #     ################   #             # # ##################            #########      #########
+                   #    #               #   #             # #                                       #      #
+                   #   #                #   #             #  #                                      #      #
+                   #   #                #   #              #  #                                     #      #
+                   #   #                #  #                #  #                                    #      #
+                   #    ################  #                  #  #                                   #      #
+                   #                      #                   #  #                                  #      #
+                   #   ################## #              #######  #                                 #      #
+                   #   #                #  #            #          #                                #      #
+                   #   #                #   #          #  #######   #        ####                   #      #
+                   #   #                #   #          # #        #  #       #  #                   #      #
+                   #   #                #   #          # #          #  #     #  #                   #      #
+                   #   #                #   #          # #           #  #    #  #                   #      #
+                   #    ################    #          #   ##########    #####  #                   #      #
+                   #                       #            #                      #                    #      #
+                    #######################               #####################                     ########
+
+version:v2.4.1,amebaD v6.0a(Aug 14 2019)
+interface 0 is initialized
+interface 1 is initialized
+
+Initializing WIFI ...
+WIFI initialized
+
+init_thread(54), Available heap 0x27418
+AT_UART_CONF: 38400,8,1,0,0
+
+
+#?
+----------------- TEST COMMAND MODE HELP 12 [0e07c99c:0e07ca5c]------------------
+        HELP (?) :
+                 Print help messag
+
+        DW <Address, Hex>
+                 Dump memory dword or Read Hw dword register;
+                 Can Dump only one dword at the same time
+                 Unit: 4Bytes
+
+        EW <Address, Hex>
+                 Write memory dword or Write Hw dword register
+                 Can write only one dword at the same time
+                 Ex: EW Address Value
+
+        FLASH
+                 erase chip
+                 erase sector addr
+                 erase block addr
+                 read addr len
+                 write addr data
+
+        EFUSE
+                 wmap addr len data
+                 rmap
+                 <wmap 0x00 2 8195> efuse[0]=0x95, efuse [1]=0x81
+                 <wmap 0xF0 4 11223344> [0xF0]=0x22, [0xF1]=0x11, [0xF2]=0x444, [0xF3]=0x33
+
+        REBOOT
+                 reboot
+                 reboot uartburn
+
+        TICKPS
+                 r: release os wakelock
+                 a: acquire os wakelock
+
+        RTC
+                 get
+
+        APTEST
+                 get
+
+        TSFTEST
+                 get
+
+        >>
+                 switch shell to KM0
+
+        LOGBUF
+                 KM0 help to print KM4 log
+
+----------------- TEST COMMAND MODE END  12 [0e07c99c:0e07ca5c]------------------
+
+#>>
+KM0 shell
+
+#>>
+KM4 shell
+
+#DW 0x10000000
+10000000: 00000000
+
+
+#EW 0x10000000 ffffffff
+10000000: FFFFFFFF
+
+#DW 0x10000000
+10000000: FFFFFFFF
+
+#EW 0x10000000 00000000
+10000000: 00000000
+
