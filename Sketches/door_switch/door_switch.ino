@@ -1,13 +1,18 @@
 /*
   This sketch shows how to use power save deepsleep mode for a door/window switch
-  This design uses a 74HC02 as a one shot to tigger the wake pin, PA26 (17)and the contacts
+  This design uses a 74HC02 as a one shot to trigger the wake pin, PA26 (17)and the contacts
   of the magnetic switch are also buffered by a 02 gate because the input leakage of the BW16 
-  module can be too high for the the 1 Meg pullup resistors.
+  module can be too high for the the 1 Meg pullup resistors. My measurements show the module including
+  additional components (74HC02, resistors and capacitors) only consumes 12 uA when in deepsleep. I
+  have the board connected to one AA 600 mAH LiPoFe4 battery and my calculations say I can operate 
+  over one year before recharging with several door open and closures per day. I do not use an
+  LDO regulator with the LiPoFe4 battery operation.  I remove the battery 
+  from the door switch module for charging so not to over voltage the module.
   Modified to pin numbers to work on BW16 module (RTL8720DN)
   D26:26=PA_21 and D27:27=PA_20 are not available on BW16 module
   Note that the awake time is ~ 9 seconds at the shortest. Therefore it is possible to open and close a
   door within this time so only the last state is recorded.  I added a work around that reads the state
-  of the magnetic switch at the beginning of the awake period and if this is differnt after the wifi and
+  of the magnetic switch at the beginning of the awake period and if this is different after the WiFi and
   MQTT server connect, both states are sent to the MQTT server.
 */
 
