@@ -13,19 +13,17 @@ Loop Back test for the SPI port of the Arduino
  !! Connect MOSI to MISO pin for loopback!!
 ================================== EG LABS =======================================*/
 
- 
+// Updated 3/2/2021 to use SPI1 without creating a seperate SPIClass
+// SPI1 Pins: MOSI = 21(PA12), MISO = 20(PA13), Clk = 19(PA14), CS = 18(PA15)
 
-#include <SPI.h>                                                  // including the SPI library
-
-SPIClass  myspi ((void *)(&SPI1), 21, 22, 23, 20);
-// MOSI = 21(PA12), MISO = 22(PA13), Clk = 23(PA14), CS = 20(PA15)
+#include <SPI.h>     // including the SPI library
 
 const uint8_t max_length = 20;
-char outByte [max_length] = "ENGINEERS GARAGE";                           // string to be send and received via SPI port
+char outByte [max_length] = "ENGINEERS GARAGE";               // string to be send and received via SPI port
 
-//int led = 1;  //PB1                                                    // variable which holds the pin number at which the LED is attached
+//int led = 1;  //PB1                                         // variable which holds the pin number at which the LED is attached
 
-char inByte;                                                      // variable which stores the value of the byte received from SPI bus
+char inByte[max_length];                                     // variable which stores the bytes received from SPI bus
 
 int i = 0;                                                         
 
@@ -36,9 +34,9 @@ void setup()
 
   //pinMode(led, OUTPUT);                                           // setting the LED pin as output
 
-  Serial.begin(115200);                                             // initializing the serial port at 9600 baud rate
+  Serial.begin(115200);                                             // initializing the serial port at 115200 baud rate
 
-  myspi.begin();                                                    // initialize the SPI port as master
+  SPI1.begin();                                                    // initialize the SPI port as master
 
   delay(100);  
 
@@ -55,13 +53,12 @@ void loop()
 
   {
 
-    inByte = myspi.transfer(outByte [i]);
-
-    Serial.write(inByte);   
+    inByte[i] = SPI1.transfer(outByte [i]);
+   
 
   }
 
-  Serial.println();
+  Serial.println(inByte);
 
   
 

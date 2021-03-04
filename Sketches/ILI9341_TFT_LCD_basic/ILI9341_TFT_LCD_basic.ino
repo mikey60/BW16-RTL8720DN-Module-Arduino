@@ -2,18 +2,22 @@
  * This sketch demonstrates how to use TFT LCD with ILI9314 api
  * 
  * Pre-requirement:
- *     an ILI9341 TFT LCD with SPI interface
+ *     an ILI9341 TFT LCD with SPI interface; Note VCC = 3.3V and LED = 5V
  * 
- * An ILI9341 TFT LCD with SPI interface can be used with spi to
+ * An ILI9341 TFT LCD with SPI interface
  * send command and data. We can draw text, line, circle, and
  * other picture on it.
  * 
  **/
 
 
-#include "SPI.h"
+#include <SPI.h>
 /*  myspiILI9341.cpp is modified from original AmebaILI9341.cpp file in SPI library for 
-    BW16(RTL8720DN) module */
+    BW16(RTL8720DN) module 
+    Updated 3/2/2021 to use SPI1 without creating a seperate SPIClass
+    SPI1 Pins: MOSI = 21(PA12), MISO = 20(PA13), Clk = 19(PA14), CS = 18(PA15)
+    
+*/
 #include "myspiILI9341.h"
 
 #if defined(BOARD_RTL8195A)
@@ -27,11 +31,10 @@
 #elif defined(BOARD_RTL8721D) // Works for RTL8720DN (BW16 module) with re-defined pins in variant.cpp
 #define TFT_RESET       1   //PB1
 #define TFT_DC          2   //PB3
-#define TFT_CS          20  //PA15
-// Pins to use on BW16; SPI pins are actually set in myspiILI9341.cpp -> SPIClass myspi (....
-//#define TFT_CLK         23  //PA14
+#define TFT_CS          18  //PA15
+//#define TFT_CLK         19  //PA14
 //#define TFT_MOSI        21  //PA12
-//#define TFT_MISO        22  //PA13
+//#define TFT_MISO        20  //PA13
 #endif
 
 myspiILI9341 tft = myspiILI9341(TFT_CS, TFT_DC, TFT_RESET);

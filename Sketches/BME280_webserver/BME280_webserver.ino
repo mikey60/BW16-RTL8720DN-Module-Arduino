@@ -4,7 +4,7 @@
   Complete project is at: http://embedded-lab.com/blog/making-a-simple-weather-web-server-using-esp8266-and-bme280/
   
   Modified code from Rui Santos' Temperature Weather Server posted on http://randomnerdtutorials.com  
-  NOTE: I2C Interface: Default for BW16 (RTL8720DN) : SCL=PA25, SDA=PA26
+  NOTE: I2C Interface: Default for BW16 (RTL8720DN) : SDA = 17(PA26), SCL = 16(PA25)
 
 *********/
 
@@ -74,11 +74,6 @@ void getWeather() {
     
     p = bme.readPressure()/100.0F;
     pin = 0.02953*p;
-    temperatureString = String(t, 2);
-    humidityString = String(h, 1);
-    pressureString = String(p, 2);
-    pressureInchString = String(pin, 2);
-    dpString = String(dp, 1);
     delay(100);
  
 }
@@ -109,15 +104,15 @@ void loop() {
             client.println("<body><h1>BW16 (RTL8720DN) Weather Web Server</h1>");
             client.println("<table border=\"2\" width=\"456\" cellpadding=\"10\"><tbody><tr><td>");
             client.println("<h3>Temperature = ");
-            client.println(temperatureString);
+            client.println(t);
             client.println("&deg;F</h3><h3>Humidity = ");
-            client.println(humidityString);
+            client.println(h);
             client.println("%</h3><h3>Approx. Dew Point = ");
-            client.println(dpString);
+            client.println(dp);
             client.println("&deg;F</h3><h3>Pressure = ");
-            client.println(pressureString);
+            client.println(p);
             client.println("hPa (");
-            client.println(pressureInchString);
+            client.println(pin);
             client.println("Inch)</h3></td></tr></tbody></table></body></html>");  
             break;
         }

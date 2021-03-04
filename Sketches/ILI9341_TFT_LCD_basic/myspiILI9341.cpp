@@ -1,10 +1,11 @@
+// Updated 3/2/2021 to use SPI1 without creating a seperate SPIClass
+// SPI1 Pins: MOSI = 21(PA12), MISO = 20(PA13), Clk = 19(PA14), CS = 18(PA15)
 #include "myspiILI9341.h"
 #include "SPI.h"
 
 #include "font5x7.h"
 
 #include <inttypes.h>
-SPIClass myspi ((void *)(&SPI1), 21, 22, 23, 20);
 
 myspiILI9341::myspiILI9341(int csPin, int dcPin, int resetPin)
 {
@@ -34,7 +35,7 @@ void myspiILI9341::begin(void)
     _dcPort = digitalPinToPort(_dcPin);
     _dcMask = digitalPinToBitMask(_dcPin);
 
-    myspi.begin();
+    SPI1.begin();
 
     reset();
 
@@ -169,35 +170,35 @@ void myspiILI9341::setAddress(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1
     }
 
     *portOutputRegister(_dcPort) &= ~(_dcMask);
-    myspi.transfer(ILI9341_CASET);
+    SPI1.transfer(ILI9341_CASET);
     *portOutputRegister(_dcPort) |=  (_dcMask);
-    myspi.transfer(x >> 8);
-    myspi.transfer(x & 0xFF);
-    myspi.transfer((x+w) >> 8);
-    myspi.transfer((x+w) & 0xFF);
+    SPI1.transfer(x >> 8);
+    SPI1.transfer(x & 0xFF);
+    SPI1.transfer((x+w) >> 8);
+    SPI1.transfer((x+w) & 0xFF);
 
     *portOutputRegister(_dcPort) &= ~(_dcMask);
-    myspi.transfer(ILI9341_PASET);
+    SPI1.transfer(ILI9341_PASET);
     *portOutputRegister(_dcPort) |=  (_dcMask);
-    myspi.transfer(y >> 8);
-    myspi.transfer(y & 0xFF);
-    myspi.transfer((y+h) >> 8);
-    myspi.transfer((y+h) & 0xFF);
+    SPI1.transfer(y >> 8);
+    SPI1.transfer(y & 0xFF);
+    SPI1.transfer((y+h) >> 8);
+    SPI1.transfer((y+h) & 0xFF);
 
     *portOutputRegister(_dcPort) &= ~(_dcMask);
-    myspi.transfer(ILI9341_RAMWR);
+    SPI1.transfer(ILI9341_RAMWR);
 }
 
 void myspiILI9341::writecommand(uint8_t command)
 {
     *portOutputRegister(_dcPort) &= ~(_dcMask);
-    myspi.transfer(command);
+    SPI1.transfer(command);
 }
 
 void myspiILI9341::writedata(uint8_t data)
 {
     *portOutputRegister(_dcPort) |=  (_dcMask);
-    myspi.transfer(data);
+    SPI1.transfer(data);
 }
 
 void myspiILI9341::setRotation(uint8_t m)
@@ -263,8 +264,8 @@ void myspiILI9341::fillRectangle(int16_t x, int16_t y, int16_t w, int16_t h, uin
 
     *portOutputRegister(_dcPort) |=  (_dcMask);
     for (i = 0; i < pixelCount; i++) {
-        myspi.transfer(color_hi);
-        myspi.transfer(color_lo);
+        SPI1.transfer(color_hi);
+        SPI1.transfer(color_lo);
     }
 }
 
@@ -276,8 +277,8 @@ void myspiILI9341::drawPixel(int16_t x, int16_t y, uint16_t color)
 
     setAddress(x, y, (x + 1), (y + 1));
     *portOutputRegister(_dcPort) |=  (_dcMask);
-    myspi.transfer(color >> 8);
-    myspi.transfer(color & 0xFF);
+    SPI1.transfer(color >> 8);
+    SPI1.transfer(color & 0xFF);
 }
 
 void myspiILI9341::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
@@ -315,8 +316,8 @@ void myspiILI9341::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint
         *portOutputRegister(_dcPort) |=  (_dcMask);
         linelen = abs(y1-y0);
         for (idx = 0; idx < linelen; idx++) {
-            myspi.transfer(color_hi);
-            myspi.transfer(color_lo);
+            SPI1.transfer(color_hi);
+            SPI1.transfer(color_lo);
         }
     } else if (y0 == y1) {
         // draw horizontal line
@@ -337,8 +338,8 @@ void myspiILI9341::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint
         *portOutputRegister(_dcPort) |=  (_dcMask);
         linelen = abs(x1 - x0);
         for (idx = 0; idx < linelen; idx++) {
-            myspi.transfer(color_hi);
-            myspi.transfer(color_lo);
+            SPI1.transfer(color_hi);
+            SPI1.transfer(color_lo);
         }
     } else {
         // Bresenham's line algorithm

@@ -11,9 +11,10 @@
 
 #include <APA102.h>
 
-// Define which pins to use.
-const uint8_t dataPin = 21;
-const uint8_t clockPin = 23;
+// Define which pins to use for bit banging; not needed for SPI but defined for APA102 object
+// Should be able to use most pins for bit banging; chose SPI1 MISO and SPI1 Clk
+const uint8_t dataPin = 21;  //PA12
+const uint8_t clockPin = 19; //PA14
 
 // Create an object for writing to the LED strip.
 APA102<dataPin, clockPin> ledStrip;

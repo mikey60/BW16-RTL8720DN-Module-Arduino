@@ -6,7 +6,7 @@
  * This is the main header file for the APA102 library. */
 
 #include <Arduino.h>
-#include "SPI.h"
+#include <SPI.h>
 
 namespace Pololu
 {
@@ -21,10 +21,6 @@ namespace Pololu
     rgb_color() {};
     rgb_color(uint8_t r, uint8_t g, uint8_t b) : red(r), green(g), blue(b) {};
   } rgb_color;
-  #endif
-
-  #ifdef APA102_USE_HW_SPI  
-  SPIClass myspi ((void *)(&SPI1), 21, 22, 23, 20);  //default clock speed = 25 MHz
   #endif
   
   /*! An abstract base class for APA102.  This class is useful if you want
@@ -154,7 +150,7 @@ namespace Pololu
       FastGPIO::Pin<clockPin>::setOutputLow();
       #endif
       #ifdef APA102_USE_HW_SPI
-      myspi.begin();
+      SPI1.begin();
       #else
       digitalWrite(dataPin, LOW);
       pinMode(dataPin, OUTPUT);
@@ -192,7 +188,7 @@ namespace Pololu
       FastGPIO::Pin<clockPin>::setOutputValueLow();
       #endif
       #ifdef APA102_USE_HW_SPI
-      myspi.transfer(b);
+      SPI1.transfer(b);
       #else
       digitalWrite(dataPin, b >> 7 & 1);
       digitalWrite(clockPin, HIGH);

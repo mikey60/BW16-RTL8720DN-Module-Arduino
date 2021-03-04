@@ -1,4 +1,4 @@
-const int output_pin = 20;  //PA15 based on edit of variant.cpp
+const int output_pin = 18;  //PA15 based on edit of variant.cpp
 const char out_pin_name[5] = "PA15";
 
 const int input_pin = 0;  //PB2 based on edit of variant.cpp

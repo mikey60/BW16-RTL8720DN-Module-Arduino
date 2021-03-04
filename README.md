@@ -1,7 +1,13 @@
 ### **BW16 (RTL8720DN) Module - Getting Started with Arduino**
-I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
+**Revisions**
 
-The module I purchased is from Digikey for $4.25 Part number ‎1597-102110419-ND‎, manufactured by Seeed Technology Co., Ltd.  It can be purchased on ebay, AliExpress, and of course the Seed Studio website.
+- **March 3, 2021** - Implemented the recommendation from @moononournation that changes the variant.cpp file to be compatible with the SPI1 pin definition in the SPI.cpp file. This simplifies the sketches that use SPI so that the creation of another SPIClass is not required. So this is a 'major' change for the sketches that use SPI.  A new 'modified variant.cpp can be found in the variant_cpp_mod folder.  I also corrected and updated some comments in the sketches.
+
+**Background**
+
+- I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
+
+- The module I purchased is from Digikey for $4.25 Part number ‎1597-102110419-ND‎, manufactured by Seeed Technology Co., Ltd.  It can be purchased on ebay, AliExpress, and of course the Seed Studio website.
 
 **Getting Started with Arduino and BW16 Module**
 
@@ -21,5 +27,5 @@ The module I purchased is from Digikey for $4.25 Part number ‎1597-102110419-N
         Press and hold the switch to PA7.
         Press and release the switch to the CHIP_EN pin.
         Release the switch to PA7.  
-- A another way to use the BW16 module is to use an ESP8266 Burning Fixture Development Board but that requires some cuts and jumpers to work properly.  Then a separate 3.3 volt power supply and USB to 3.3v TTL adapter are not required.
+- A another way to use the BW16 module is to use an ESP8266 Burning Fixture Development Board but that requires some cuts, jumpers and a resistor to work properly.  Then a separate 3.3 volt power supply and USB to 3.3v TTL adapter are not required.
 - The 'RTL8720DN multi function board' folder contains all the files for a 'general purpose' PCB that I created using KiCad for the door switch and MQTT Digital LED projects.

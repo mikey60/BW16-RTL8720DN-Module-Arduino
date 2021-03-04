@@ -14,7 +14,7 @@
   Written by Limor Fried & Kevin Townsend for Adafruit Industries.
   BSD license, all text above must be included in any redistribution
  ***************************************************************************/
- // I2C Interface: Default for BW16 (RTL8720DN) : SCL=PA25, SDA=PA26
+ // I2C Interface: Default for BW16 (RTL8720DN) : SCL = 16(PA25) , SDA = 17(PA26)
 
 #include <Wire.h>
 #include <SPI.h>

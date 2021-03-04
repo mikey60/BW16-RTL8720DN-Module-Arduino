@@ -2,10 +2,14 @@
  * This sketch demonstrates how to use TFT LCD with ILI9314 api to display BME20 sensor
  * data 
  * Pre-requirement:
- *     an ILI9341 TFT LCD with SPI interface
+ *     an ILI9341 TFT LCD with SPI interface; Note VCC = 3.3V and LED = 5V
  *     BME20 sensor connected to I2C interface
- * 
+ *     BW16 Module/ RTL8720 Pins: SDA = 17(PA26), SCL = 16(PA25)
+ * Updated 3/2/2021 to use SPI1 without creating a seperate SPIClass
+ * SPI1 Pins: MOSI = 21(PA12), MISO = 20(PA13), Clk = 19(PA14), CS = 18(PA15)
+ 
 ***************************************************************************
+
   This is a library for the BME280 humidity, temperature & pressure sensor
 
   Designed specifically to work with the Adafruit BME280 Breakout
@@ -29,7 +33,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-#include "SPI.h"
+#include <SPI.h>
 /*  myspiILI9341.cpp is modified from original AmebaILI9341.cpp file in SPI library for 
     BW16(RTL8720DN) module */
 #include "myspiILI9341.h"
@@ -45,13 +49,13 @@
 #elif defined(BOARD_RTL8721D) // Works for RTL8720DN (BW16 module) with re-defined pins in variant.cpp
 #define TFT_RESET       1   //PB1
 #define TFT_DC          2   //PB3
-#define TFT_CS          20  //PA15
-// Pins to use on BW16; SPI pins are actually set in myspiILI9341.cpp -> SPIClass myspi (....
-//#define TFT_CLK         23  //PA14
-//#define TFT_MOSI        21  //PA12
-//#define TFT_MISO        22  //PA13
+#define TFT_CS          18  //PA15
+//#define TFT_CLK         19  //PA14
+//#define TFT_MOSI        20  //PA12
+//#define TFT_MISO        21  //PA13
 #endif
 
+// For SPI interface only
 #define BME_SCK 13
 #define BME_MISO 12
 #define BME_MOSI 11

@@ -32,8 +32,8 @@ light Kitchen LED Light:
 #include <WiFi.h>
 #include <PubSubClient.h>  //!!!!!!! Do not install.  Program uses a modified version that is included with ameba board library !!!! 
 
-#define APA102_USE_HW_SPI  // Works with BW16(RTL8722DN) module only  25MHz H/W SPI versus  ~200 KHz bit banging
-//uses SPI_MOSI (pin 21) as data pin and SPI_CLK (pin 23) as clock pin as defined in APA102.h
+#define APA102_USE_HW_SPI  // Works with BW16(RTL8720DN) module only  25MHz H/W SPI versus  ~200 KHz bit banging
+//uses SPI_MOSI (pin 21/ PA12) as data pin and SPI_CLK (pin 19/ PA14) as clock pin of SPI1 as defined in APA102.h
 
 #include "APA102.h"
 #include <jsonlib.h>
@@ -64,8 +64,9 @@ const int BUFFER_SIZE = 512;
 /*********************************** APA102 LED Defintions ********************************/
 
 // Define which pins to use for bit banging; not needed for SPI but defined for APA102 object
-const uint8_t dataPin = 21;
-const uint8_t clockPin = 23;
+// Should be able to use most pins for bit banging; chose SPI1 MISO and SPI1 Clk
+const uint8_t dataPin = 21;  //PA12
+const uint8_t clockPin = 19; //PA14
 
 // Create an object for writing to the LED strip.
 APA102<dataPin, clockPin> ledStrip;
@@ -338,7 +339,7 @@ void loop() {
      // red = 255;
      // green = 255;
      // blue = 255;
-      brightness = 230;  //max brightness limited by power suppy capability
+     //brightness = 230;  //max brightness limited by power suppy capability
 
       // Soft White 2700K
      // red = 255;
