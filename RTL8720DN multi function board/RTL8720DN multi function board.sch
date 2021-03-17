@@ -686,7 +686,7 @@ U 1 1 601EECF7
 P 9850 2900
 F 0 "SW2" H 9850 3135 50  0000 C CNN
 F 1 "DNLOAD" H 9850 3044 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_EVQPE1" H 9850 2900 50  0001 C CNN
+F 2 "Button_Switch_SMD:SW_Push_SPST_NO_Alps_SKRK" H 9850 2900 50  0001 C CNN
 F 3 "~" H 9850 2900 50  0001 C CNN
 	1    9850 2900
 	1    0    0    -1  
@@ -771,8 +771,8 @@ Wire Wire Line
 	5800 6050 5800 6100
 Text Notes 8550 2450 0    50   ~ 0
 To put the device in download mode: \n  Press and hold DNLOAD (SW2)\n  Press and release RESET (SW1)\n  Release DNLOAD (SW2)
-Text Notes 1350 900  0    50   ~ 0
-R7 is normally open when AMS1117-3.3 is installed and\n  using a 5V power connection on J3\nDon't install  AMS1117-3.3 and short R7 or \n   install a 0 Ohm resistor to connect J3 3.3 volts (LiFePO4 Battery)\n   directly to board 3.3v connections 
+Text Notes 1700 900  0    50   ~ 0
+R7 is normally open when AMS1117-3.3 is installed and\n  using a 5V power connection on J3\nDon't install  AMS1117-3.3 and short R7 or \n   install a 0 Ohm resistor to connect J3, 3.3 volts (LiFePO4 Battery)\n   directly to board 3.3v connections.
 Text Notes 1800 5600 0    50   ~ 0
 The 74HC02 (U2) and its associated resistors and capacitors\n   R3-R6 and C1-C2 are only needed for the door switch application.\nIt provides a 200 msec logic high pulse to PA26 when the\n   door is opened and closed to wakeup the device from deepsleep.
 Text Notes 1800 6100 0    50   ~ 0
@@ -821,4 +821,45 @@ Wire Wire Line
 Connection ~ 5400 4550
 Wire Wire Line
 	5400 4550 7750 4550
+$Comp
+L Connector:Conn_01x02_Female J7
+U 1 1 60454734
+P 3700 1550
+F 0 "J7" H 3400 1650 50  0000 C CNN
+F 1 "Pwr " H 3592 1644 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3700 1550 50  0001 C CNN
+F 3 "~" H 3700 1550 50  0001 C CNN
+	1    3700 1550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 1650 3250 1650
+Wire Wire Line
+	3250 1650 3250 2050
+Wire Wire Line
+	3250 2050 2800 2050
+Connection ~ 2800 2050
+Wire Wire Line
+	3500 1550 3150 1550
+Connection ~ 3150 1550
+Text Label 3800 1650 0    50   ~ 0
+GND
+Text Label 3800 1550 0    50   ~ 0
++3.3V_OUT
+$Comp
+L Connector:Conn_01x01_Female J8
+U 1 1 604762E4
+P 1450 1050
+F 0 "J8" H 1342 1235 50  0000 C CNN
+F 1 "Pwr" H 1342 1144 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 1450 1050 50  0001 C CNN
+F 3 "~" H 1450 1050 50  0001 C CNN
+	1    1450 1050
+	-1   0    0    -1  
+$EndComp
+Text Label 1000 1100 0    50   ~ 0
++5V_OUT
+Wire Wire Line
+	1650 1050 1800 1050
+Connection ~ 1800 1050
 $EndSCHEMATC

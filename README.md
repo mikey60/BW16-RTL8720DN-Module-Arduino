@@ -3,6 +3,8 @@
 
 - **March 3, 2021** - Implemented the recommendation from @moononournation that changes the variant.cpp file to be compatible with the SPI1 pin definition in the SPI.cpp file. This simplifies the sketches that use SPI so that the creation of another SPIClass is not required. So this is a 'major' change for the sketches that use SPI.  A new 'modified variant.cpp can be found in the variant_cpp_mod folder.  I also corrected and updated some comments in the sketches.
 
+- **March 17, 2021** - Slightly updated the RTL8720DN multi function board with additional Power and ground connection holes.  Added a sketch for rtlduino/BW16 board.  The sketch describes the modifications to make the board more useful.
+
 **Background**
 
 - I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
