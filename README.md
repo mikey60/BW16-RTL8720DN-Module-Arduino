@@ -5,6 +5,8 @@
 
 - **March 17, 2021** - Slightly updated the RTL8720DN multi function board with additional Power and ground connection holes.  Added a sketch for rtlduino/BW16 board.  The sketch describes the modifications to make the board more useful.
 
+- **March 24, 2021** - Added RTL8720DN/BW16 and rtlduino pinout images supplied by @moononournation.
+
 **Background**
 
 - I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
@@ -15,7 +17,13 @@
 
 - To get started with arduino I used the ambd_arduino package found at https://github.com/ambiot/ambd_arduino/tree/master/Arduino_package.  
 - I followed the Arduino IDE installation instructions as outlined in step 2 of the webpage at https://www.amebaiot.com/en/amebad-arduino-getting-started/
-- One the package is installed the variant.cpp file needs to be modified to map some of the pins of the BW16 module.  This file can be found at **"C:\Users\your_user\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.0.7\variants\rtl8721d\variant.cpp"**  where "your_user" is the user name of the your windows login.  Version 3.0.7 was the latest version at this time. The modified file can be found in the variant_cpp_mod folder. The modifications made to the variant.cpp file are shown in the 'variant.cpp changes.png file found in the info folder.   The original variant.cpp file will have to be replaced with the modified file every time the package is updated.  I am sure that there is a better way to do this probably by creating a RTL8720DN/BW16 variant.
+- One the package is installed the variant.cpp file needs to be modified to map some of the pins of the BW16 module.  This file can be found at **"C:\Users\your_user\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.0.7\variants\rtl8721d\variant.cpp"**  where "your_user" is the user name of the your windows login.  Version 3.0.7 was the latest version at this time. The modified file can be found in the variant_cpp_mod folder. The modifications made to the variant.cpp file are shown in the 'variant.cpp changes.png file found in the info folder.   The original variant.cpp file will have to be replaced with the modified file every time the package is updated.  I am sure that there is a better way to do this probably by creating a RTL8720DN/BW16 variant. Thanks to @moononournation, pinout pictures for the RTL8720DN and the rtlduino devices that include the Arduino pin numbers defined in the modified variant.cpp file are shown below. Larger images of the pinouts can be found in the Info folder.
+
+<IMG SRC="https://github.com/mikey60/BW16-RTL8720DN-Module-Arduino/blob/main/Info/RTL8720DN_Pinout_Small.png">
+
+<IMG SRC="https://github.com/mikey60/BW16-RTL8720DN-Module-Arduino/blob/main/Info/rtlduino_Pinout_Small.png">
+
+
 - Many of the example sketches of the repository found in the sketches folder have been modified from the original examples in the Realtek Arduino package. In many cases the pin numbers were changed to work with the BW16 module.  I also modified code to use the hardware SPI channel 1 of the BW16 module.
 - I could not figure out how to easily get the BW16 module to work with the FastLED library so I opted to use the APA102/sk9822 LED strips that use both data and clock lines and can be driven with the SPI hardware.
 - The Hard way to get started is to attach breadboard interconnect pigtails to all the pins of the BW16 module.  See the Hard_way_to_test pictures in the info folder.
