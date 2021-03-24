@@ -641,7 +641,7 @@ PA15
 Text Label 5800 2900 0    50   ~ 0
 PA13
 Text Label 5850 3050 0    50   ~ 0
-PA3
+PB3
 Text Label 1050 4500 0    50   ~ 0
 NC
 Wire Wire Line
@@ -862,4 +862,6 @@ Text Label 1000 1100 0    50   ~ 0
 Wire Wire Line
 	1650 1050 1800 1050
 Connection ~ 1800 1050
+Text Notes 5200 1600 0    50   ~ 0
+Note: Can connect 3.3 volts directly to PB3 to measure the battery.\n Set PB3 to an output before going into deep sleep for negligible current draw.
 $EndSCHEMATC
