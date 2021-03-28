@@ -1,13 +1,13 @@
-/* Program to drive the RGB LED on the RTLduino version 1.0 board with the BW16 module.
+/* Program to drive the RGB LED on the rtlduino version 1.0 board with the BW16 module.
  * Note: I cut the AT_TX(PB1) and AT_RX(PB2) connections from the BW16 module at the 
  * pins 3 and 2 of CH340 chip and jumpered the CH340 pins 3 and 2 to LOG_TX(PA7) and 
  * LOG_RX(PA8) to be able to download the device.  I also changed the 0 ohm resistor in 
- * series with the burn switch to meet the RTL872X requirements for the mininmum 
+ * series with the burn switch to meet the RTL872X requirements for the minimum 
  * resistance to ground. This resistor is connected to LOG_TX to enable download mode.
  */
 const int LED_red = 21;    //PA12 based on edit of variant.cpp
 const int LED_green = 19;  //PA14 based on edit of variant.cpp
-const int LED_blue = 20;   //PA13 based on variant.cpp
+const int LED_blue = 20;   //PA13 based on edit of variant.cpp
 
 void setup(){
     Serial.begin(115200);

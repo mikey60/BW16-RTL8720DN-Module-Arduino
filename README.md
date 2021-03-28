@@ -7,6 +7,8 @@
 
 - **March 24, 2021** - Added RTL8720DN/BW16 and rtlduino pinout images supplied by @moononournation.
 
+- **March 28, 2021** - Small corrections, add information on rtlduino modifications and link to @moononournation Instructable to program rtlduino.
+
 **Background**
 
 - I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
@@ -39,3 +41,4 @@
         Release the switch to PA7.  
 - A another way to use the BW16 module is to use an ESP8266 Burning Fixture Development Board but that requires some cuts, jumpers and a resistor to work properly.  Then a separate 3.3 volt power supply and USB to 3.3v TTL adapter are not required.
 - The 'RTL8720DN multi function board' folder contains all the files for a 'general purpose' PCB that I created using KiCad for the door switch and MQTT Digital LED projects.
+- rtlduino module modifications - In my opinion the USB port should be connected to the LOG_TX and LOG_RX pins rather than the AT_TX and AT_RX pins. I don’t believe that many people use the AT port. The first thing I did is cut and jumper the board so the USB port was connected to the LOG port so I could do downloads and terminal interaction with the USB using Arduino. Also I replaced the zero ohm resistor in series with the burn switch with 1.8 Kohm to comply with the >1 Kohm of the ‘GPIO Pull Low Restriction’ of the RTL872xD data sheet. See the 'rtlduino_modifications.pdf' file in the Info folder.  Another way to program the rtlduino can be found at https://www.instructables.com/RTL8720DN/.
