@@ -9,6 +9,8 @@
 
 - **March 28, 2021** - Small corrections, add information on rtlduino modifications and link to @moononournation Instructable to program rtlduino.
 
+- **July 7, 2021** - Include a modified variant.h file in the variant_cpp_mod folder so the AT serial can be used as noted by @flowlow in the issues.
+
 **Background**
 
 - I decided to try the BW16 (RTL8720DN) module because it supports 5GHz WiFi and my 2.4 GHz WiFi band is very busy with old electronics, WiFi security cameras, neighbors networks, microwave oven and many IOT 2.4 GHz only (ESP8266 and ESP32) modules connected. My 2.4 GHz channel can quite often spike over to over 40% utilization whereas my 5GHz channel is less than 10%. I also recommend creating a second WLAN with only a 5 GHz channel.  It should also use a different SSID than the main WLAN.  That way the module can only connect to the 5 GHZ and won't connect to the 2.4 GHz because it has a stronger signal.
